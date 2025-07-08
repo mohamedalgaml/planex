@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planex - FAQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-blue: #0095ff;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --accent-color: #ff6f61;
+            --transition-speed: 0.3s;
+            --glow-blue: rgba(0, 149, 255, 0.5);
+            --glow-orange: rgba(255, 111, 97, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        body.light-theme {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .faq-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 40px 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .faq-header {
+            margin-bottom: 40px;
+        }
+
+        .faq-header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        body.dark-theme .faq-header h1 {
+            color: var(--text-light);
+        }
+
+        .brand-nav {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: -1px;
+            transition: color var(--transition-speed) ease;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        body.dark-theme .brand-nav {
+            color: var(--primary-blue);
+        }
+
+        .faq-list {
+            text-align: left;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme .faq-item {
+            background: rgba(26, 26, 26, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 149, 255, 0.2);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        body.dark-theme .faq-question {
+            color: var(--text-light);
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        body.dark-theme .faq-answer {
+            color: var(--text-light);
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        body.dark-theme footer {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .faq-container {
+                padding: 20px 10px;
+            }
+
+            .faq-header h1 {
+                font-size: 2rem;
+            }
+
+            .brand-nav {
+                font-size: 2rem;
+            }
+
+            .faq-item {
+                padding: 15px;
+            }
+
+            .faq-question {
+                font-size: 1.1rem;
+            }
+
+            .faq-answer {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="faq-container">
+        <div class="faq-header">
+            <a href="index.php" class="brand-nav">Planex</a>
+            <h1>Frequently Asked Questions</h1>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h2 class="faq-question">What is Planex?</h2>
+                <p class="faq-answer">Planex is a platform that connects visionary founders with investors to create sustainable solutions for a better planet. We focus on renewable energy, sustainable agriculture, and eco-friendly infrastructure.</p>
+            </div>
+            <div class="faq-item">
+                <h2 class="faq-question">How do I join Planex?</h2>
+                <p class="faq-answer">You can join Planex by creating an account through the "Get Started" button on our homepage or by signing up via the "Sign Up / Log In" link in the navigation bar.</p>
+            </div>
+            <div class="faq-item">
+                <h2 class="faq-question">Who can become a member?</h2>
+                <p class="faq-answer">Anyone with a passion for sustainability—whether you’re a founder with an innovative idea or an investor looking to support impactful ventures—can become a member of Planex.</p>
+            </div>
+            <div class="faq-item">
+                <h2 class="faq-question">How do I contact support?</h2>
+                <p class="faq-answer">You can reach our support team by visiting the "Contact Us" page, accessible through the navigation menu under "Contact."</p>
+            </div>
+            <div class="faq-item">
+                <h2 class="faq-question">Is there a cost to join?</h2>
+                <p class="faq-answer">Joining Planex is free for founders to submit their ideas. Investors may have subscription options for premium features, details of which can be found after signing up.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Planex Founders Club</p>
+    </footer>
+
+    <script>
+        // Theme synchronization
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+            document.body.classList.toggle('light-theme', savedTheme === 'light');
+        });
+    </script>
+</body>
+</html>

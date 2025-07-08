@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="History of Keep on Motivation (KM) and Planex">
+    <title>Planex: Our History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-blue: #0095ff;
+            --accent-color: #ff6f61;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --transition-speed: 0.3s;
+            --navbar-height: 60px;
+            /* New complementary colors */
+            --teal: #00b4b4;
+            --golden-yellow: #f4c430;
+            --muted-purple: #8a4af3;
+            --new-bg-start: #1a3c34; /* Deep teal for background */
+            --new-bg-end: #4a2e5b;   /* Soft cosmic purple */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding-top: var(--navbar-height);
+            background: linear-gradient(135deg, var(--new-bg-start), var(--new-bg-end));
+            background-color: transparent;
+            color: var(--text-dark);
+            min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overflow-x: hidden;
+        }
+
+        body.light-theme {
+            background: linear-gradient(135deg, #e6f0ea, #f0e6f5);
+            color: var(--text-dark);
+        }
+
+        body.dark-theme {
+            background: linear-gradient(135deg, var(--new-bg-start), var(--new-bg-end));
+            color: var(--text-light);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: transparent;
+            padding: 10px 20px;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.light-theme .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        body.dark-theme .navbar.scrolled {
+            background-color: rgba(26, 26, 26, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brand-nav {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: -1px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            position: relative;
+            transition: all var(--transition-speed) ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 25px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        body.dark-theme .nav-btn {
+            color: var(--text-light);
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--teal), var(--muted-purple));
+            opacity: 0;
+            transition: all var(--transition-speed) ease;
+            z-index: -1;
+            transform: scale(0.5);
+            border-radius: 25px;
+        }
+
+        .nav-btn:hover::before {
+            opacity: 0.1;
+            transform: scale(1);
+        }
+
+        .nav-btn:hover {
+            color: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 180, 180, 0.2);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--teal), var(--muted-purple));
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 180, 180, 0.3);
+            animation: buttonPulse 2s infinite;
+        }
+
+        .nav-btn.active:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 149, 255, 0.2);
+        }
+
+        .auth-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.5s ease;
+        }
+
+        .auth-button:hover::before {
+            left: 100%;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 149, 255, 0.3);
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 15px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        body.dark-theme .theme-switcher {
+            color: var(--text-light);
+        }
+
+        .theme-switcher:hover {
+            color: var(--golden-yellow);
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 180, 180, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 180, 180, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 180, 180, 0);
+            }
+        }
+
+        /* Original Mega Menu Setup - Unchanged */
+        .mega-menu-container {
+            position: fixed;
+            top: var(--navbar-height);
+            left: 0;
+            width: 100%;
+            background-color: #f8f8f8;
+            transform: translateY(-20px);
+            transition: all var(--transition-speed) ease;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        body.dark-theme .mega-menu-container {
+            background-color: #111111;
+        }
+
+        .mega-menu-active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .mega-menu-section {
+            color: var(--text-dark);
+            min-width: 285px;
+            text-align: center;
+        }
+
+        body.dark-theme .mega-menu-section {
+            color: var(--text-light);
+        }
+
+        .mega-menu-section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 40px;
+        }
+
+        .mega-menu-section li {
+            margin: 0;
+        }
+
+        .mega-menu-section a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+        }
+
+        body.dark-theme .mega-menu-section a {
+            color: var(--text-light);
+        }
+
+        .mega-menu-active .mega-menu-section a {
+            opacity: 1;
+            transition: opacity 0.3s ease-in 0.1s;
+        }
+
+        .mega-menu-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-color));
+            transition: width var(--transition-speed) ease;
+        }
+
+        .mega-menu-section a:hover::after {
+            width: 100%;
+        }
+
+        .mega-menu-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .overlay {
+            position: fixed;
+            top: var(--navbar-height);
+            left: 0;
+            width: 100%;
+            height: calc(100% - var(--navbar-height));
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .overlay-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .history-section {
+            padding: 120px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            background: none;
+        }
+
+        .history-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(135deg, var(--teal), var(--muted-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--teal), var(--golden-yellow));
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 100px;
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            transform: translateX(-100px);
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(100px);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle, var(--teal) 0%, var(--muted-purple) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            animation: pulseMarker 2s infinite ease-in-out;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -284px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -284px;
+        }
+
+        .timeline-marker::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 274px;
+            height: 1px;
+            background: var(--golden-yellow);
+            z-index: -1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker::before {
+            left: -274px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker::before {
+            right: -274px;
+        }
+
+        .timeline-date {
+            position: absolute;
+            top: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            transform: translateY(-50%);
+            z-index: 2;
+            background: linear-gradient(135deg, var(--golden-yellow), var(--muted-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 5px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 180, 180, 0.2);
+        }
+
+        body.dark-theme .timeline-date {
+            color: var(--text-light);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-date {
+            right: -395px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            left: -395px;
+            text-align: right;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--teal), var(--muted-purple));
+            z-index: -1;
+            border-radius: 17px;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+        }
+
+        body.dark-theme .timeline-content {
+            background: rgba(26, 26, 26, 0.95);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 180, 180, 0.2);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        body.dark-theme .timeline-content h2 {
+            color: var(--text-light);
+        }
+
+        .timeline-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        body.dark-theme .timeline-content p {
+            color: var(--text-light);
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        body.dark-theme footer {
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .brand-nav {
+                font-size: 1.5rem;
+            }
+
+            .nav-buttons {
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .auth-button {
+                padding: 6px 16px;
+                font-size: 0.8rem;
+            }
+
+            .history-section {
+                padding: 80px 10px;
+            }
+
+            .history-title {
+                font-size: 2.5rem;
+                margin-bottom: 60px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding: 20px 20px 40px 150px;
+                transform: translateX(0);
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                transform: translateX(-50px);
+            }
+
+            .timeline-marker {
+                left: 134px;
+                width: 14px;
+                height: 14px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-marker,
+            .timeline-item:nth-child(even) .timeline-marker {
+                right: auto;
+            }
+
+            .timeline-marker::before {
+                width: 114px;
+                left: -114px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-marker::before,
+            .timeline-item:nth-child(even) .timeline-marker::before {
+                right: auto;
+            }
+
+            .timeline-date {
+                left: 150px;
+                right: auto;
+                font-size: 1.3rem;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-date,
+            .timeline-item:nth-child(even) .timeline-date {
+                left: 150px;
+            }
+
+            .timeline-content {
+                padding: 25px;
+                min-height: 200px;
+            }
+
+            .timeline-content h2 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+
+            .timeline-content p {
+                font-size: 1.1rem;
+            }
+
+            .mega-menu-content {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .mega-menu-section {
+                min-width: 100%;
+            }
+
+            .mega-menu-section ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mega-menu-section a {
+                font-size: 1rem;
+            }
+        }
+
+        @keyframes pulseMarker {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 10px rgba(0, 180, 180, 0.5);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 15px rgba(0, 180, 180, 0.7);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 10px rgba(0, 180, 180, 0.5);
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.php" class="brand-nav">Planex</a>
+            <div class="nav-buttons">
+                <button class="nav-btn" data-menu="who-we-are"><span>Who We Are?</span></button>
+                <button class="nav-btn" data-menu="contact"><span>Contact</span></button>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <button class="theme-switcher" id="themeToggle">🌙</button>
+                <a href="signin.html" class="auth-button">Sign Up / Log In</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mega-menu-container" id="who-we-are-menu">
+        <div class="mega-menu-content">
+            <div class="mega-menu-section">
+                <ul>
+                    <li><a href="our-vision.html">Our Vision</a></li>
+                    <li><a href="history.html">History</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mega-menu-container" id="contact-menu">
+        <div class="mega-menu-content">
+            <div class="mega-menu-section">
+                <ul>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="modalOverlay"></div>
+
+    <section class="history-section">
+        <h1 class="history-title">Our History</h1>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <span class="timeline-date">2023</span>
+                <div class="timeline-content">
+                    <h2>Launch of Keep on Motivation (KM) YouTube</h2>
+                    <p>The Keep on Motivation (KM) journey began with the launch of the YouTube channel, aimed at delivering motivational content through longer-form videos. The channel featured inspiring talks, interviews with individuals who overcame challenges, and practical advice on personal growth. The focus on consistency and quality content helped attract a dedicated audience seeking encouragement and actionable motivation.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <span class="timeline-date">2024</span>
+                <div class="timeline-content">
+                    <h2>KM Instagram Expansion</h2>
+                    <p>Building on the YouTube channel’s success, the KM Instagram page was introduced to engage the audience through quick, impactful posts. It showcased motivational quotes, success stories, and interactive content like polls and Q&A sessions. Within just 5 months, both platforms experienced remarkable growth, amassing 460k followers and fostering a supportive community committed to personal development and positivity.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <span class="timeline-date">2025</span>
+                <div class="timeline-content">
+                    <h2>Birth of Planex</h2>
+                    <p>Planex was developed as a platform to promote global innovation and sustainability. The idea centers on bringing together creative minds to develop solutions that address pressing environmental and societal challenges. From its inception, Planex focused on refining its mission, exploring collaboration opportunities, and emphasizing action-driven innovation to make a tangible positive impact on the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Planex Founders Club</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const megaMenus = document.querySelectorAll('.mega-menu-container');
+            const overlay = document.getElementById('modalOverlay');
+            let activeMenu = null;
+            let timeoutId = null;
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-theme');
+                    body.classList.remove('light-theme');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    body.classList.add('light-theme');
+                    body.classList.remove('dark-theme');
+                    themeToggle.textContent = '🌙';
+                }
+                localStorage.setItem('theme', theme);
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+
+            themeToggle.addEventListener('click', function () {
+                if (body.classList.contains('dark-theme')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                timelineItems.forEach((item, index) => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    if (itemTop < window.innerHeight - 100 && !item.classList.contains('visible')) {
+                        item.classList.add('visible');
+                        item.style.transitionDelay = `${index * 0.2}s`;
+                    }
+                });
+            });
+
+            function showMegaMenu(menuId) {
+                clearTimeout(timeoutId);
+                
+                megaMenus.forEach(menu => {
+                    menu.classList.remove('mega-menu-active');
+                });
+
+                const menu = document.getElementById(menuId);
+                if (menu) {
+                    menu.classList.add('mega-menu-active');
+                    overlay.classList.add('overlay-active');
+                    activeMenu = menu;
+                }
+            }
+
+            function hideMegaMenu() {
+                clearTimeout(timeoutId);
+                megaMenus.forEach(menu => {
+                    menu.classList.remove('mega-menu-active');
+                });
+                overlay.classList.remove('overlay-active');
+                activeMenu = null;
+            }
+
+            navButtons.forEach(button => {
+                const menuId = button.dataset.menu + '-menu';
+
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (activeMenu && activeMenu.id === menuId) {
+                        hideMegaMenu();
+                    } else {
+                        showMegaMenu(menuId);
+                    }
+                });
+
+                button.addEventListener('mouseenter', function () {
+                    clearTimeout(timeoutId);
+                    showMegaMenu(menuId);
+                });
+
+                button.addEventListener('mouseleave', function () {
+                    timeoutId = setTimeout(() => {
+                        if (!activeMenu?.matches(':hover')) {
+                            hideMegaMenu();
+                        }
+                    }, 200);
+                });
+            });
+
+            megaMenus.forEach(menu => {
+                menu.addEventListener('mouseenter', function () {
+                    clearTimeout(timeoutId);
+                });
+
+                menu.addEventListener('mouseleave', function () {
+                    timeoutId = setTimeout(() => {
+                        if (!this.matches(':hover')) {
+                            hideMegaMenu();
+                        }
+                    }, 200);
+                });
+            });
+
+            overlay.addEventListener('click', function (e) {
+                e.preventDefault();
+                hideMegaMenu();
+                navButtons.forEach(btn => btn.classList.remove('active'));
+            });
+
+            document.addEventListener('click', function (e) {
+                if (activeMenu && 
+                    !activeMenu.contains(e.target) && 
+                    !navButtons.some(btn => btn.contains(e.target))) {
+                    hideMegaMenu();
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                }
+            });
+
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Our Vision at Planex Founders Club - Innovating for a sustainable future.">
+    <title>Our Vision - Planex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-blue: #0095ff;
+            --accent-color: #ff6f61;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --transition-speed: 0.3s;
+            --navbar-height: 60px;
+            --tech-glow: rgba(0, 149, 255, 0.1);
+            --tech-accent: rgba(255, 111, 97, 0.1);
+            /* New complementary colors */
+            --teal: #00b4b4;
+            --golden-yellow: #f4c430;
+            --muted-purple: #8a4af3;
+            --new-bg-start: #1a3c34; /* Deep teal for background */
+            --new-bg-end: #4a2e5b;   /* Soft cosmic purple */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding-top: var(--navbar-height);
+            background: linear-gradient(135deg, var(--new-bg-start), var(--new-bg-end));
+            background-color: transparent;
+            color: var(--text-dark);
+            min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overflow-x: hidden;
+        }
+
+        body.light-theme {
+            background: linear-gradient(135deg, #e6f0ea, #f0e6f5);
+            color: var(--text-dark);
+        }
+
+        body.dark-theme {
+            background: linear-gradient(135deg, var(--new-bg-start), var(--new-bg-end));
+            color: var(--text-light);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: transparent;
+            padding: 10px 20px;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.light-theme .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        body.dark-theme .navbar.scrolled {
+            background-color: rgba(26, 26, 26, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brand-nav {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: -1px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            position: relative;
+            transition: all var(--transition-speed) ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 25px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        body.dark-theme .nav-btn {
+            color: var(--text-light);
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--teal), var(--muted-purple));
+            opacity: 0;
+            transition: all var(--transition-speed) ease;
+            z-index: -1;
+            transform: scale(0.5);
+            border-radius: 25px;
+        }
+
+        .nav-btn:hover::before {
+            opacity: 0.1;
+            transform: scale(1);
+        }
+
+        .nav-btn:hover {
+            color: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 180, 180, 0.2);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--teal), var(--muted-purple));
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 180, 180, 0.3);
+            animation: buttonPulse 2s infinite;
+        }
+
+        .nav-btn.active:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 149, 255, 0.2);
+        }
+
+        .auth-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.5s ease;
+        }
+
+        .auth-button:hover::before {
+            left: 100%;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 149, 255, 0.3);
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 15px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        body.dark-theme .theme-switcher {
+            color: var(--text-light);
+        }
+
+        .theme-switcher:hover {
+            color: var(--golden-yellow);
+        }
+
+        @keyframes buttonPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 180, 180, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 180, 180, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 180, 180, 0);
+            }
+        }
+
+        .mega-menu-container {
+            position: fixed;
+            top: var(--navbar-height);
+            left: 0;
+            width: 100%;
+            background-color: #f8f8f8;
+            transform: translateY(-20px);
+            transition: all var(--transition-speed) ease;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        body.dark-theme .mega-menu-container {
+            background-color: #111111;
+        }
+
+        .mega-menu-active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-menu-content {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .mega-menu-section {
+            color: var(--text-dark);
+            min-width: 285px;
+            text-align: center;
+        }
+
+        body.dark-theme .mega-menu-section {
+            color: var(--text-light);
+        }
+
+        .mega-menu-section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 40px;
+        }
+
+        .mega-menu-section li {
+            margin: 0;
+        }
+
+        .mega-menu-section a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+        }
+
+        body.dark-theme .mega-menu-section a {
+            color: var(--text-light);
+        }
+
+        .mega-menu-active .mega-menu-section a {
+            opacity: 1;
+            transition: opacity 0.3s ease-in 0.1s;
+        }
+
+        .mega-menu-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-color));
+            transition: width var(--transition-speed) ease;
+        }
+
+        .mega-menu-section a:hover::after {
+            width: 100%;
+        }
+
+        .mega-menu-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .overlay {
+            position: fixed;
+            top: var(--navbar-height);
+            left: 0;
+            width: 100%;
+            height: calc(100% - var(--navbar-height));
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .overlay-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .vision-container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .vision-container h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--teal), var(--muted-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vision-container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .vision-container img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .vision-container img:hover {
+            transform: scale(1.05);
+        }
+
+        body.dark-theme .vision-container img {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .brand-nav {
+                font-size: 1.5rem;
+            }
+
+            .nav-buttons {
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .auth-button {
+                padding: 6px 16px;
+                font-size: 0.8rem;
+            }
+
+            .vision-container {
+                margin: 40px auto;
+            }
+
+            .vision-container h1 {
+                font-size: 2rem;
+            }
+
+            .vision-container p {
+                font-size: 1rem;
+            }
+
+            .vision-container img {
+                max-width: 100%;
+            }
+
+            .mega-menu-content {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .mega-menu-section {
+                min-width: 100%;
+            }
+
+            .mega-menu-section ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mega-menu-section a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="light-theme">
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.php" class="brand-nav">Planex</a>
+            <div class="nav-buttons">
+                <button class="nav-btn" data-menu="who-we-are"><span>Who We Are?</span></button>
+                <button class="nav-btn" data-menu="contact"><span>Contact</span></button>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <button class="theme-switcher" id="themeToggle">🌙</button>
+                <a href="signin.html" class="auth-button">Sign Up / Log In</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mega-menu-container" id="who-we-are-menu">
+        <div class="mega-menu-content">
+            <div class="mega-menu-section">
+                <ul>
+                    <li><a href="our-vision.html">Our Vision</a></li>
+                    <li><a href="history.html">History</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mega-menu-container" id="contact-menu">
+        <div class="mega-menu-content">
+            <div class="mega-menu-section">
+                <ul>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="modalOverlay"></div>
+
+    <div class="vision-container">
+        <h1>Our Vision</h1>
+        <p>At Planex, we envision a world where innovation is the cornerstone of sustainability. Our mission is to bring together visionary founders, passionate innovators, and forward-thinking investors to co-create solutions that not only address today’s pressing environmental challenges but also safeguard our planet for generations to come. We’re driven by the belief that technology, when paired with purposeful collaboration, can revolutionize how we tackle issues like climate change, resource scarcity, and environmental degradation.</p>
+        <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="A lush green forest symbolizing sustainability">
+        <p>Our vision extends beyond mere problem-solving; it’s about fostering a global community committed to eco-friendly progress. We aim to empower ventures that prioritize renewable energy, sustainable agriculture, and green infrastructure, ensuring that every step forward is a step toward a healthier planet. By building strategic partnerships and nurturing groundbreaking ideas, we strive to transform concepts into tangible, impactful realities that resonate worldwide.</p>
+        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Solar panels under a clear sky, representing renewable energy">
+        <p>We see a future where innovation doesn’t compromise the Earth but enhances it—where every project we support contributes to cleaner air, thriving ecosystems, and resilient communities. Planex is more than a platform; it’s a movement to redefine progress, blending creativity with responsibility to ensure a sustainable legacy for all.</p>
+    </div>
+
+    <footer>
+        <p>© 2025 Planex Founders Club</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-theme');
+                    body.classList.remove('light-theme');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    body.classList.add('light-theme');
+                    body.classList.remove('dark-theme');
+                    themeToggle.textContent = '🌙';
+                }
+                localStorage.setItem('theme', theme);
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+
+            themeToggle.addEventListener('click', function () {
+                if (body.classList.contains('dark-theme')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const megaMenus = document.querySelectorAll('.mega-menu-container');
+            const overlay = document.getElementById('modalOverlay');
+            let activeMenu = null;
+            let timeoutId = null;
+
+            function showMegaMenu(menuId) {
+                clearTimeout(timeoutId);
+                
+                megaMenus.forEach(menu => {
+                    menu.classList.remove('mega-menu-active');
+                });
+
+                const menu = document.getElementById(menuId);
+                if (menu) {
+                    menu.classList.add('mega-menu-active');
+                    overlay.classList.add('overlay-active');
+                    activeMenu = menu;
+                }
+            }
+
+            function hideMegaMenu() {
+                clearTimeout(timeoutId);
+                megaMenus.forEach(menu => {
+                    menu.classList.remove('mega-menu-active');
+                });
+                overlay.classList.remove('overlay-active');
+                activeMenu = null;
+            }
+
+            navButtons.forEach(button => {
+                const menuId = button.dataset.menu + '-menu';
+
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (activeMenu && activeMenu.id === menuId) {
+                        hideMegaMenu();
+                    } else {
+                        showMegaMenu(menuId);
+                    }
+                });
+
+                button.addEventListener('mouseenter', function () {
+                    clearTimeout(timeoutId);
+                    showMegaMenu(menuId);
+                });
+
+                button.addEventListener('mouseleave', function () {
+                    timeoutId = setTimeout(() => {
+                        if (!activeMenu?.matches(':hover')) {
+                            hideMegaMenu();
+                        }
+                    }, 200);
+                });
+            });
+
+            megaMenus.forEach(menu => {
+                menu.addEventListener('mouseenter', function () {
+                    clearTimeout(timeoutId);
+                });
+
+                menu.addEventListener('mouseleave', function () {
+                    timeoutId = setTimeout(() => {
+                        if (!this.matches(':hover')) {
+                            hideMegaMenu();
+                        }
+                    }, 200);
+                });
+            });
+
+            overlay.addEventListener('click', function (e) {
+                e.preventDefault();
+                hideMegaMenu();
+                navButtons.forEach(btn => btn.classList.remove('active'));
+            });
+
+            document.addEventListener('click', function (e) {
+                if (activeMenu && 
+                    !activeMenu.contains(e.target) && 
+                    !navButtons.some(btn => btn.contains(e.target))) {
+                    hideMegaMenu();
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

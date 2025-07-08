@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planex - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0095ff;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --accent-color: #ff6f61;
+            --transition-speed: 0.3s;
+            --glow-blue: rgba(0, 149, 255, 0.5);
+            --glow-orange: rgba(255, 111, 97, 0.5);
+            --input-focus-glow: 0 0 0 2px rgba(0, 149, 255, 0.3);
+            --card-bg-light: rgba(255, 255, 255, 0.95);
+            --card-bg-dark: rgba(30, 30, 30, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://pplx-res.cloudinary.com/image/upload/v1740395260/user_uploads/wJzXdkUmyahOJCd/p0fz3gzx.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        body.dark-theme {
+            color: var(--text-light);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg-light);
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+            margin: 20px;
+        }
+
+        body.dark-theme .profile-container {
+            background: var(--card-bg-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .avatar-section {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 4px 12px var(--glow-blue);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px var(--glow-blue);
+        }
+
+        .avatar-section button {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .avatar-section:hover button {
+            opacity: 1;
+            bottom: -15px;
+        }
+
+        .profile-header h1 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        body.dark-theme .profile-header h1 {
+            color: var(--text-light);
+        }
+
+        .profile-header p {
+            color: #777;
+            font-size: 1rem;
+        }
+
+        body.dark-theme .profile-header p {
+            color: #aaa;
+        }
+
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .detail-section {
+            position: relative;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .detail-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .editable-field {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .editable-field span {
+            display: block;
+            padding: 12px 16px;
+            background: rgba(245, 245, 245, 0.8);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme .editable-field span {
+            background: rgba(40, 40, 40, 0.8);
+            color: var(--text-light);
+        }
+
+        .editable-field span:hover {
+            background: rgba(230, 230, 230, 0.9);
+        }
+
+        body.dark-theme .editable-field span:hover {
+            background: rgba(60, 60, 60, 0.9);
+        }
+
+        .edit-input, .edit-dropdown {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .edit-input, 
+        body.dark-theme .edit-dropdown {
+            background: rgba(40, 40, 40, 0.95);
+            color: var(--text-light);
+            border-color: #444;
+        }
+
+        .edit-input:focus, .edit-dropdown:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: var(--input-focus-glow), 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px var(--glow-blue);
+        }
+
+        .tag i {
+            cursor: pointer;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .tag i:hover {
+            opacity: 1;
+        }
+
+        #interest-input {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme #interest-input {
+            background: rgba(40, 40, 40, 0.95);
+            color: var(--text-light);
+            border-color: #444;
+        }
+
+        #interest-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: var(--input-focus-glow), 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #user-bio {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme #user-bio {
+            background: rgba(40, 40, 40, 0.95);
+            color: var(--text-light);
+            border-color: #444;
+        }
+
+        #user-bio:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: var(--input-focus-glow), 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, var(--accent-color), #e65c00);
+            color: var(--text-light);
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .save-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .save-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 111, 97, 0.6);
+            background: linear-gradient(135deg, #ff5a4d, #cc5200);
+        }
+
+        .save-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 30px;
+                max-width: 90%;
+            }
+            
+            .avatar-section {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Staggered animations for detail sections */
+        .detail-section:nth-child(1) { animation-delay: 0.1s; }
+        .detail-section:nth-child(2) { animation-delay: 0.2s; }
+        .detail-section:nth-child(3) { animation-delay: 0.3s; }
+        .detail-section:nth-child(4) { animation-delay: 0.4s; }
+        .save-btn { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="avatar-section">
+                <img src="default-avatar.jpg" id="user-avatar" class="profile-avatar">
+                <input type="file" id="avatar-upload" accept="image/*" style="display:none;">
+                <button onclick="document.getElementById('avatar-upload').click()">
+                    <i class="fas fa-camera"></i> Change
+                </button>
+            </div>
+            <h1 id="user-name">John Doe</h1>
+            <p id="user-title">Computer Science Student</p>
+        </div>
+
+        <div class="profile-details">
+            <div class="detail-section">
+                <h3><i class="fas fa-university"></i> Education</h3>
+                <div class="editable-field" onclick="toggleEdit('university')">
+                    <span id="university">Stanford University</span>
+                    <select id="university-select" class="edit-dropdown" style="display:none;">
+                        <option>Stanford University</option>
+                        <option>MIT</option>
+                        <option>Harvard University</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="editable-field" onclick="toggleEdit('major')">
+                    <span id="major">Computer Science</span>
+                    <input type="text" id="major-input" class="edit-input" style="display:none;" 
+                           value="Computer Science">
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                <div class="editable-field" onclick="toggleEdit('country')">
+                    <span id="country">United States</span>
+                    <select id="country-select" class="edit-dropdown" style="display:none;">
+                        <option>United States</option>
+                        <option>United Kingdom</option>
+                        <option>Canada</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3><i class="fas fa-heart"></i> Interests</h3>
+                <div class="tags-container" id="interests-tags">
+                    <div class="tag">AI <i class="fas fa-times"></i></div>
+                    <div class="tag">Web Development <i class="fas fa-times"></i></div>
+                    <div class="tag">Sustainability <i class="fas fa-times"></i></div>
+                </div>
+                <input type="text" id="interest-input" placeholder="Add interest...">
+            </div>
+
+            <div class="detail-section">
+                <h3><i class="fas fa-file-alt"></i> Bio</h3>
+                <textarea id="user-bio">Passionate about AI and web development. Currently working on a sustainability project that uses machine learning to optimize energy consumption in residential buildings. Looking to collaborate with other developers and designers who share similar interests.</textarea>
+            </div>
+
+            <button class="save-btn" id="save-profile">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Theme synchronization
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+            document.body.classList.toggle('light-theme', savedTheme === 'light');
+            
+            // Initialize avatar upload
+            document.getElementById('avatar-upload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        document.getElementById('user-avatar').src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Initialize interest input
+            document.getElementById('interest-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim() !== '') {
+                    addInterest(this.value.trim());
+                    this.value = '';
+                }
+            });
+            
+            // Initialize save button
+            document.getElementById('save-profile').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                    }, 1500);
+                }, 1000);
+            });
+        });
+
+        function toggleEdit(field) {
+            const span = document.getElementById(field);
+            const editor = document.getElementById(field + (field === 'country' || field === 'university' ? '-select' : '-input'));
+            
+            if (span.style.display !== 'none') {
+                span.style.display = 'none';
+                editor.style.display = 'block';
+                editor.focus();
+            } else {
+                span.style.display = 'block';
+                editor.style.display = 'none';
+                if (editor.tagName === 'INPUT') {
+                    span.textContent = editor.value;
+                } else {
+                    span.textContent = editor.options[editor.selectedIndex].text;
+                }
+            }
+        }
+
+        function addInterest(interest) {
+            const tagsContainer = document.getElementById('interests-tags');
+            const tag = document.createElement('div');
+            tag.className = 'tag';
+            tag.innerHTML = `${interest} <i class="fas fa-times" onclick="this.parentElement.remove()"></i>`;
+            tagsContainer.appendChild(tag);
+            
+            // Add animation
+            tag.style.animation = 'fadeIn 0.3s ease-out';
+        }
+
+        // Handle tag removal
+        document.querySelectorAll('.tag i').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.remove();
+            });
+        });
+    </script>
+</body>
+</html>

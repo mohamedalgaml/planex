@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planex - Student Directory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0095ff;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --accent-color: #ff6f61;
+            --transition-speed: 0.3s;
+            --glow-blue: rgba(0, 149, 255, 0.5);
+            --glow-orange: rgba(255, 111, 97, 0.5);
+            --input-focus-glow: 0 0 0 2px rgba(0, 149, 255, 0.3);
+            --card-bg-light: rgba(255, 255, 255, 0.95);
+            --card-bg-dark: rgba(30, 30, 30, 0.95);
+            --filter-bg-light: rgba(245, 245, 245, 0.9);
+            --filter-bg-dark: rgba(50, 50, 50, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://pplx-res.cloudinary.com/image/upload/v1740395260/user_uploads/wJzXdkUmyahOJCd/p0fz3gzx.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--text-dark);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        body.dark-theme {
+            color: var(--text-light);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .directory-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .search-filters {
+            background: var(--card-bg-light);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme .search-filters {
+            background: var(--card-bg-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .search-filters:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 14px 20px 14px 45px;
+            border-radius: 10px;
+            border: none;
+            background: var(--filter-bg-light);
+            color: var(--text-dark);
+            font-size: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme .search-bar input {
+            background: var(--filter-bg-dark);
+            color: var(--text-light);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: var(--input-focus-glow), 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar::before {
+            content: '\f002';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        body.dark-theme .search-bar::before {
+            color: #aaa;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-section select {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: none;
+            background: var(--filter-bg-light);
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        body.dark-theme .filter-section select {
+            background: var(--filter-bg-dark);
+            color: var(--text-light);
+        }
+
+        .filter-section select:focus {
+            outline: none;
+            box-shadow: var(--input-focus-glow), 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .filter-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--glow-blue);
+        }
+
+        .filter-tag i {
+            font-size: 0.8rem;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .student-card {
+            background: var(--card-bg-light);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed) ease;
+            animation: fadeIn 0.6s ease-out;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-theme .student-card {
+            background: var(--card-bg-dark);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .student-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-color));
+        }
+
+        .student-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-blue);
+            display: block;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 8px var(--glow-blue);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .student-card:hover .student-avatar {
+            transform: scale(1.1);
+        }
+
+        .student-card h3 {
+            text-align: center;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        body.dark-theme .student-card h3 {
+            color: var(--text-light);
+        }
+
+        .student-major, .student-university {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        body.dark-theme .student-major,
+        body.dark-theme .student-university {
+            color: #aaa;
+        }
+
+        .student-interests {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .student-interests span {
+            background: rgba(0, 149, 255, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-theme .student-interests span {
+            background: rgba(0, 149, 255, 0.2);
+        }
+
+        .student-interests span:hover {
+            background: rgba(0, 149, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .follow-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary-blue), #007acc);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 8px rgba(0, 149, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .follow-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .follow-btn:hover::after {
+            width: 200%;
+            height: 200%;
+        }
+
+        .follow-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 149, 255, 0.4);
+        }
+
+        .follow-btn:active {
+            transform: translateY(1px);
+        }
+
+        .follow-btn.following {
+            background: linear-gradient(135deg, var(--accent-color), #e65c00);
+            box-shadow: 0 4px 8px rgba(255, 111, 97, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Staggered animations for student cards */
+        .student-card:nth-child(1) { animation-delay: 0.1s; }
+        .student-card:nth-child(2) { animation-delay: 0.2s; }
+        .student-card:nth-child(3) { animation-delay: 0.3s; }
+        .student-card:nth-child(4) { animation-delay: 0.4s; }
+        .student-card:nth-child(5) { animation-delay: 0.5s; }
+        .student-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .filter-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .filter-section select {
+                min-width: 100%;
+            }
+            
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-filters {
+                padding: 20px 15px;
+            }
+            
+            .student-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="directory-container">
+        <div class="search-filters">
+            <div class="search-bar">
+                <input type="text" placeholder="Search students by name, university, or skills...">
+            </div>
+            
+            <div class="filter-section">
+                <select id="university-filter">
+                    <option value="">All Universities</option>
+                    <option>Stanford University</option>
+                    <option>MIT</option>
+                    <option>Harvard University</option>
+                    <option>University of Cambridge</option>
+                    <option>ETH Zurich</option>
+                </select>
+                
+                <select id="country-filter">
+                    <option value="">All Countries</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Canada</option>
+                    <option>Germany</option>
+                    <option>Switzerland</option>
+                </select>
+                
+                <select id="major-filter">
+                    <option value="">All Majors</option>
+                    <option>Computer Science</option>
+                    <option>Electrical Engineering</option>
+                    <option>Mechanical Engineering</option>
+                    <option>Data Science</option>
+                    <option>Business Administration</option>
+                </select>
+            </div>
+            
+            <div class="tag-filters" id="interest-filters">
+                <div class="filter-tag">
+                    AI <i class="fas fa-times"></i>
+                </div>
+                <div class="filter-tag">
+                    Web Development <i class="fas fa-times"></i>
+                </div>
+                <div class="filter-tag">
+                    Sustainability <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="students-grid" id="students-list">
+            <div class="student-card">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="student-avatar">
+                <h3>Sarah Johnson</h3>
+                <p class="student-major">Computer Science</p>
+                <p class="student-university">MIT, United States</p>
+                <div class="student-interests">
+                    <span>AI</span>
+                    <span>Machine Learning</span>
+                    <span>Robotics</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            
+            <div class="student-card">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="student-avatar">
+                <h3>Michael Chen</h3>
+                <p class="student-major">Electrical Engineering</p>
+                <p class="student-university">Stanford University, United States</p>
+                <div class="student-interests">
+                    <span>IoT</span>
+                    <span>Embedded Systems</span>
+                    <span>Renewable Energy</span>
+                </div>
+                <button class="follow-btn following">Following</button>
+            </div>
+            
+            <div class="student-card">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="student-avatar">
+                <h3>Emma Wilson</h3>
+                <p class="student-major">Data Science</p>
+                <p class="student-university">ETH Zurich, Switzerland</p>
+                <div class="student-interests">
+                    <span>Data Visualization</span>
+                    <span>Big Data</span>
+                    <span>Statistics</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            
+            <div class="student-card">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" class="student-avatar">
+                <h3>David Müller</h3>
+                <p class="student-major">Mechanical Engineering</p>
+                <p class="student-university">Technical University of Munich, Germany</p>
+                <div class="student-interests">
+                    <span>Robotics</span>
+                    <span>3D Printing</span>
+                    <span>Sustainable Design</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            
+            <div class="student-card">
+                <img src="https://randomuser.me/api/portraits/women/63.jpg" class="student-avatar">
+                <h3>Priya Patel</h3>
+                <p class="student-major">Business Administration</p>
+                <p class="student-university">Harvard University, United States</p>
+                <div class="student-interests">
+                    <span>Entrepreneurship</span>
+                    <span>FinTech</span>
+                    <span>Social Impact</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+            </div>
+            
+            <div class="student-card">
+                <img src="https://randomuser.me/api/portraits/men/81.jpg" class="student-avatar">
+                <h3>James Wilson</h3>
+                <p class="student-major">Computer Science</p>
+                <p class="student-university">University of Cambridge, United Kingdom</p>
+                <div class="student-interests">
+                    <span>Web Development</span>
+                    <span>Cybersecurity</span>
+                    <span>Blockchain</span>
+                </div>
+                <button class="follow-btn following">Following</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme synchronization
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+            document.body.classList.toggle('light-theme', savedTheme === 'light');
+            
+            // Initialize follow buttons
+            document.querySelectorAll('.follow-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('following');
+                    if (this.classList.contains('following')) {
+                        this.textContent = 'Following';
+                    } else {
+                        this.textContent = 'Follow';
+                    }
+                });
+            });
+            
+            // Initialize filter tags
+            document.querySelectorAll('.filter-tag i').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.parentElement.remove();
+                });
+            });
+            
+            // Initialize search and filters
+            const searchInput = document.querySelector('.search-bar input');
+            const universityFilter = document.getElementById('university-filter');
+            const countryFilter = document.getElementById('country-filter');
+            const majorFilter = document.getElementById('major-filter');
+            
+            [searchInput, universityFilter, countryFilter, majorFilter].forEach(element => {
+                element.addEventListener('change', filterStudents);
+            });
+        });
+
+        function filterStudents() {
+            console.log('Filtering students...');
+        }
+        window.addEventListener('scroll', function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                
+                console.log('Loading more students...');
+            }
+        });
+    </script>
+</body>
+</html>
